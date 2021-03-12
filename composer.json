@@ -1,0 +1,21 @@
+{
+    "name": "voidblaster/paul",
+    "description": "PHP API Utility Library",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Elias Batek"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "slim/slim": "^4.7",
+        "respect/validation": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Voidblaster\\Paul\\": "src/"
+        }
+    }
+}
