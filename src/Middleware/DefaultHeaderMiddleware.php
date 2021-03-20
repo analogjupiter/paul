@@ -10,23 +10,25 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 /**
- * Sets Content-Type header to a default value if non is provided
+ * Sets the specified header to a specified value if non is provided
  */
-class DefaultContentTypeMiddleware implements MiddlewareInterface
+class DefaultHeaderMiddleware implements MiddlewareInterface
 {
-    private $defaultContentType;
+    private string $header;
+    private string $defaultValue;
 
-    public function __construct(string $defaultContentType)
+    public function __construct(string $header, string $defaultValue)
     {
-        $this->defaultContentType = $defaultContentType;
+        $this->header = $header;
+        $this->defaultValue = $defaultValue;
     }
 
     public function process(Request $request, RequestHandler $handler): Response
     {
         $response = $handler->handle($request);
 
-        if (!$response->hasHeader('Content-Type')) {
-            $response = $response->withHeader('Content-Type', $this->defaultContentType);
+        if (!$response->hasHeader($this->header)) {
+            $response = $response->withHeader($this->header, $this->defaultValue);
         }
 
         return $response;
